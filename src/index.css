@@ -1,1 +1,15 @@
 @import 'tailwindcss';
+
+:root {
+  --background-surface: #0f0f12;
+  --background-primary: #17181c;
+  --background-secondary: #25262d;
+  --background-tertiary: #ffffff17;
+  --text-primary: #fff;
+  --text-secondary: #fffc;
+  --text-tertiary: #ffffffa3;
+  --text-primary-inverse-static: #fff;
+  --text-secondary-inverse-static: #fffc;
+  --button-primary: #007aff;
+  --button-secondary: #434455;
+}

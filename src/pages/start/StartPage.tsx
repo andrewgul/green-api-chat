@@ -1,5 +1,50 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router';
+import { Input } from '../../components/input';
+import { FormField } from '../../components/form-field';
+import { Button } from '../../components/button';
 
 export const StartPage = React.memo(() => {
-  return <>start</>;
+  const [idInstance, setIdInstance] = React.useState('');
+  const [apiTokenInstance, setApiTokenInstance] = React.useState('');
+
+  const isValid = idInstance.trim().length > 0 && apiTokenInstance.trim().length > 0;
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    if (!isValid) {
+      return;
+    }
+
+    // @todo сохранить данные
+    navigate('/chat');
+  };
+
+  return (
+    <div className="w-screen min-h-screen bg-(--background-primary) flex items-center justify-center">
+      <form className="p-5 rounded-2xl bg-(--background-secondary)" onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <h1 className="text-(--text-primary) text-lg">Добро пожаловать</h1>
+          <h2 className="text-(--text-tertiary) text-md">
+            Пожалуйста, введите данные от вашего аккаунта
+          </h2>
+        </div>
+        <FormField label="idInstance">
+          <Input value={idInstance} onChange={(event) => setIdInstance(event.target.value)} />
+        </FormField>
+        <FormField label="apiTokenInstance">
+          <Input
+            value={apiTokenInstance}
+            onChange={(event) => setApiTokenInstance(event.target.value)}
+          />
+        </FormField>
+        <div className="mt-6">
+          <Button stretched disabled={!isValid} type="submit">
+            Войти
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
 });
