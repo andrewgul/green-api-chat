@@ -34,13 +34,18 @@ export const StartPage = React.memo(() => {
           </h2>
         </div>
         <FormField label="idInstance">
-          <Input value={idInstance} onChange={(event) => setIdInstance(event.target.value)} />
+          <Input
+            value={idInstance}
+            onChange={(event) => setIdInstance(event.target.value)}
+            placeholder=" Введите idInstance"
+          />
         </FormField>
         <FormField label="apiTokenInstance">
           <Input
             value={apiTokenInstance}
             onChange={(event) => setApiTokenInstance(event.target.value)}
             type="password"
+            placeholder="Введите apiTokenInstance"
           />
         </FormField>
         <div className="mt-6">

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { closeModal, useModalStore } from '../modals';
+import { closeModal, useModalStore } from '../stores/modals';
 import { Portal } from '../components/portal';
 
 export const ModalProvider = ({ children }: React.PropsWithChildren) => {

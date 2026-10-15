@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 
 :root {
+  --size-6: 6px;
+  --size-12: 12px;
+  --size-10: 10px;
+  --size-16: 16px;
+  --size-32: 32px;
+
   --background-surface: #0f0f12;
   --background-primary: #17181c;
   --background-secondary: #25262d;
@@ -12,4 +18,35 @@
   --text-secondary-inverse-static: #fffc;
   --button-primary: #007aff;
   --button-secondary: #434455;
+  --float-primary-flat: #17181c;
+  --divider-secondary: #ffffff0f;
+
+  --bubbles-background-bubble-gradient-step-1-a: #8849b4;
+  --bubbles-background-bubble-gradient-step-2-a: #735acd;
+  --bubbles-background-bubble-gradient-step-3-a: #5d6ae5;
+
+  --bubbles-background-bubble-gradient-step-1-b: #3b3f5e;
+  --bubbles-background-bubble-gradient-step-2-b: #373a4e;
+  --bubbles-background-bubble-gradient-step-3-b: #32343d;
+
+  --border-radius-common-m: var(--size-12);
+  --border-radius-common-l: var(--size-16);
+  --border-radius-common-s-half: var(--size-6);
+  --border-radius-local-bubble-regular: var(--border-radius-common-l);
+  --border-radius-local-bubble-stack-corner: var(--border-radius-common-s-half);
+
+  --spacing-common-l: 16px;
+  --spacing-common-m-half: var(--size-10);
+  --spacing-xs: 4px;
+  --spacing-s-half: 6px;
+  --spacing-m: 12px;
+  --spacing-m-half: 10px;
+  --spacing-l: 16px;
+
+  --shadow-elevation-3-primary: #0000004d;
+  --shadow-elevation-3-secondary: #0000004d;
+
+  --font-body-size: 16px;
+  --font-body-line-height: 20px;
+  --font-body-letter-spacing: 0.15px;
 }

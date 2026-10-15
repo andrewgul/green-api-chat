@@ -2,11 +2,13 @@ import * as React from 'react';
 import { Input } from './input';
 import { Button } from './button';
 import { createChat } from '../stores/chats';
-import { closeModal } from '../modals';
+import { closeModal } from '../stores/modals';
 import { GreenApi } from '../lib/green-api';
+import { useNavigate } from 'react-router';
 
 export const CreateChatModal = React.memo(() => {
   const [phone, setPhone] = React.useState('');
+  const navigate = useNavigate();
 
   const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -16,17 +18,18 @@ export const CreateChatModal = React.memo(() => {
     }
 
     const account = await GreenApi.checkAccount({
-      phone: Number(phone),
+      phoneNumber: Number(phone),
     });
 
-    if (account) {
+    if (account.success) {
       createChat({
-        id: account.chatId,
-        phone: account.phoneNumber,
+        id: account.data.chatId,
+        phone: account.data.phoneNumber,
       });
-    }
 
-    closeModal();
+      navigate(`/chat/${account.data.chatId}`);
+      closeModal();
+    }
   };
 
   return (
