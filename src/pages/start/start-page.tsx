@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Input } from '../../components/input';
 import { FormField } from '../../components/form-field';
 import { Button } from '../../components/button';
+import { setCredentials } from '../../stores/credentials';
 
 export const StartPage = React.memo(() => {
   const [idInstance, setIdInstance] = React.useState('');
@@ -12,12 +13,14 @@ export const StartPage = React.memo(() => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
     if (!isValid) {
       return;
     }
 
-    // @todo сохранить данные
+    setCredentials({ idInstance, apiTokenInstance });
     navigate('/chat');
   };
 
@@ -37,6 +40,7 @@ export const StartPage = React.memo(() => {
           <Input
             value={apiTokenInstance}
             onChange={(event) => setApiTokenInstance(event.target.value)}
+            type="password"
           />
         </FormField>
         <div className="mt-6">

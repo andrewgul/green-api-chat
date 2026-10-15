@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from 'react-router';
-import { ChatPage } from '../pages/chat';
 import { StartPage } from '../pages/start';
+import { ChatLayout } from '../components/chat-layout';
+import { ChatPage } from '../pages/chat';
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,13 @@ export const router = createBrowserRouter([
   },
   {
     path: '/chat',
-    Component: ChatPage,
+    Component: ChatLayout,
+    children: [
+      {
+        path: '/chat/:chatId',
+        Component: ChatPage,
+      },
+    ],
   },
   {
     path: '*',

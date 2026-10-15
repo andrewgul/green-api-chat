@@ -1,5 +1,5 @@
 import * as React from 'react';
 
 export const ChatPage = React.memo(() => {
-  return <>chat</>;
+  return <div className="w-full">чат</div>;
 });
