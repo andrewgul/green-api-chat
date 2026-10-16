@@ -1,14 +1,14 @@
 import { Navigate, Outlet } from 'react-router';
-import { useChatsStore } from '../stores/chats';
-import { Button } from './button';
-import { useCredentialsStore } from '../stores/credentials';
-import { openModal } from '../stores/modals';
+import { useChatsStore } from '../../../stores/chats';
+import { Button } from '../../button';
+import { useCredentialsStore } from '../../../stores/credentials';
+import { openModal } from '../../../stores/modals';
 import { CreateChatModal } from './create-chat-modal';
-import { Input } from './input';
+import { Input } from '../../input';
 import { Icon20AddAlt, Icon36GhostSimpleOutline } from '@vkontakte/icons';
-import { useChatPolling } from '../pages/chat/hooks/useChatPolling';
+import { useChatPolling } from './hooks/useChatPolling';
 import { useMemo, useState } from 'react';
-import { ChatListItem } from './chat-list-item';
+import { ChatListItem } from './components/chat-list-item';
 
 export const ChatLayout = () => {
   const credentials = useCredentialsStore(({ credentials }) => credentials);

@@ -36,13 +36,19 @@ export const createChat = (chat: Chat) => {
 };
 
 export const addMessage = (chatId: string, message: Message) =>
-  useChatsStore.setState((state) => ({
-    ...state,
-    messages: {
-      ...state.messages,
-      [chatId]: [...(state.messages[chatId] ?? []), message],
-    },
-  }));
+  useChatsStore.setState((state) => {
+    if (state.messages[chatId]?.some((m) => m.id === message.id)) {
+      return state;
+    }
+
+    return {
+      ...state,
+      messages: {
+        ...state.messages,
+        [chatId]: [...(state.messages[chatId] ?? []), message],
+      },
+    };
+  });
 
 export const setSettings = () =>
   useChatsStore.setState((state) => ({

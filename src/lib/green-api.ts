@@ -11,18 +11,24 @@ type Result<D> =
     };
 
 type NotifiactionBody = {
+  /** incomingMessageReceived, outgoingMessageReceived, outgoingAPIMessageReceived, stateInstanceChanged и т.д. */
+  typeWebhook: string;
   /** в секундах */
   timestamp: number;
   idMessage: string;
-  messageData: {
-    typeMessage: 'textMessage';
-    textMessageData: {
+  /** есть только у уведомлений о сообщениях */
+  messageData?: {
+    typeMessage: 'textMessage' | 'extendedTextMessage' | (string & {});
+    textMessageData?: {
       textMessage: string;
       forwardingScore: number;
       isForwarded: boolean;
     };
+    extendedTextMessageData?: {
+      text: string;
+    };
   };
-  senderData: {
+  senderData?: {
     chatId: string;
   };
 };
@@ -106,7 +112,7 @@ const get = async <P, R>({
 }): Promise<Result<R>> => {
   try {
     const response = await fetch(
-      `${url}${params && Object.keys(params).length > 0 ? new URLSearchParams(params).toString() : ''}`,
+      `${url}${params && Object.keys(params).length > 0 ? `?${new URLSearchParams(params).toString()}` : ''}`,
       {
         method: 'get',
         signal: abortController?.signal,
@@ -134,7 +140,7 @@ const get = async <P, R>({
 const del = async <P, R>({ url, params }: { url: string; params?: P }): Promise<Result<R>> => {
   try {
     const response = await fetch(
-      `${url}${params && Object.keys(params).length > 0 ? new URLSearchParams(params).toString() : ''}`,
+      `${url}${params && Object.keys(params).length > 0 ? `?${new URLSearchParams(params).toString()}` : ''}`,
       {
         method: 'delete',
       },

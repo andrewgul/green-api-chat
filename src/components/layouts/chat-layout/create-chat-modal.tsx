@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Input } from './input';
-import { Button } from './button';
-import { createChat } from '../stores/chats';
-import { closeModal } from '../stores/modals';
-import { GreenApi } from '../lib/green-api';
+import { Input } from '../../input';
+import { Button } from '../../button';
+import { createChat } from '../../../stores/chats';
+import { closeModal } from '../../../stores/modals';
+import { GreenApi } from '../../../lib/green-api';
 import { useNavigate } from 'react-router';
 
 export const CreateChatModal = React.memo(() => {

@@ -1,9 +1,8 @@
 import { createBrowserRouter, redirect } from 'react-router';
 import { StartPage } from '../pages/start';
-import { ChatLayout } from '../components/chat-layout';
+import { ChatLayout, ChatPlaceholder } from '../components/layouts/chat-layout';
 import { ChatPage } from '../pages/chat';
-import { RootLayout } from '../components/root-layout';
-import { ChatPlaceholder } from '../components/chat-placeholder';
+import { RootLayout } from '../components/layouts/root-layout';
 
 export const router = createBrowserRouter([
   {

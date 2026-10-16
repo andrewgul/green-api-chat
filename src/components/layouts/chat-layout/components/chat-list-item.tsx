@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useChatsStore, type Chat } from '../stores/chats';
+import { useChatsStore, type Chat } from '../../../../stores/chats';
 import { Link } from 'react-router';
 import { Icon24Smile } from '@vkontakte/icons';
 
