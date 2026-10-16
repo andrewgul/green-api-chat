@@ -1,10 +1,13 @@
 import * as React from 'react';
+
 import { useParams } from 'react-router';
+
+import { GreenApi } from '@/lib/green-api';
+import { addMessage, type Message as MessageType, useChatsStore } from '@/stores/chats';
+
 import { ChatInput } from './components/chat-input';
 import { Header } from './components/header';
-import { addMessage, useChatsStore, type Message as MessageType } from '../../stores/chats';
 import { Messages } from './components/messages';
-import { GreenApi } from '../../lib/green-api';
 
 const EMPTY_MESSAGES: MessageType[] = [];
 

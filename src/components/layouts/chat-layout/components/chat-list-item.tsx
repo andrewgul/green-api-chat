@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { useChatsStore, type Chat } from '../../../../stores/chats';
-import { Link } from 'react-router';
+
 import { Icon24Smile } from '@vkontakte/icons';
+import { Link } from 'react-router';
+
+import { type Chat, useChatsStore } from '@/stores/chats';
 
 type Props = {
   chat: Chat;

@@ -1,5 +1,6 @@
-import { Icon24Smile } from '@vkontakte/icons';
 import * as React from 'react';
+
+import { Icon24Smile } from '@vkontakte/icons';
 
 type Props = {
   phone: number;

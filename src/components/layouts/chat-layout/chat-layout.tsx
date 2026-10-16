@@ -1,14 +1,17 @@
-import { Navigate, Outlet } from 'react-router';
-import { useChatsStore } from '../../../stores/chats';
-import { Button } from '../../button';
-import { useCredentialsStore } from '../../../stores/credentials';
-import { openModal } from '../../../stores/modals';
-import { CreateChatModal } from './create-chat-modal';
-import { Input } from '../../input';
-import { Icon20AddAlt, Icon36GhostSimpleOutline } from '@vkontakte/icons';
-import { useChatPolling } from './hooks/useChatPolling';
 import { useMemo, useState } from 'react';
+
+import { Icon20AddAlt, Icon36GhostSimpleOutline } from '@vkontakte/icons';
+import { Navigate, Outlet } from 'react-router';
+
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
+import { useChatsStore } from '@/stores/chats';
+import { useCredentialsStore } from '@/stores/credentials';
+import { openModal } from '@/stores/modals';
+
 import { ChatListItem } from './components/chat-list-item';
+import { CreateChatModal } from './create-chat-modal';
+import { useChatPolling } from './hooks/useChatPolling';
 
 const style = {
   backgroundColor: '#121212',

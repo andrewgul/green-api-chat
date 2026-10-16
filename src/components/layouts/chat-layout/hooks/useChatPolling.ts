@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { GreenApi } from '../../../../lib/green-api';
-import { addMessage, setSettings, useChatsStore } from '../../../../stores/chats';
-import { normalizeApiTimestamp } from '../../../../lib/utils';
+
+import { GreenApi } from '@/lib/green-api';
+import { normalizeApiTimestamp } from '@/lib/utils';
+import { addMessage, setSettings, useChatsStore } from '@/stores/chats';
 
 const POLL_DELAY = 500;
 /** пауза после ошибки, чтобы не долбить API при 401/429 и проблемах с сетью */

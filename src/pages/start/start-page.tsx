@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import { useNavigate } from 'react-router';
-import { Input } from '../../components/input';
-import { FormField } from '../../components/form-field';
-import { Button } from '../../components/button';
-import { setCredentials } from '../../stores/credentials';
+
+import { Button } from '@/components/button';
+import { FormField } from '@/components/form-field';
+import { Input } from '@/components/input';
+import { setCredentials } from '@/stores/credentials';
 
 export const StartPage = React.memo(() => {
   const [idInstance, setIdInstance] = React.useState('');

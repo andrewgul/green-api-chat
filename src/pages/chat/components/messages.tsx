@@ -1,6 +1,8 @@
 import * as React from 'react';
+
+import { type Message as MessageType } from '@/stores/chats';
+
 import { Message } from './message';
-import { type Message as MessageType } from '../../../stores/chats';
 
 type Props = {
   messages: MessageType[];

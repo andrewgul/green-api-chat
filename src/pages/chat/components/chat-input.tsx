@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Button } from '../../../components/button';
+
 import { Icon24ArrowUp } from '@vkontakte/icons';
+
+import { Button } from '@/components/button';
 
 const style = {
   boxShadow:

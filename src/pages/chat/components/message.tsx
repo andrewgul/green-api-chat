@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { type Message as MessageType } from '../../../stores/chats';
+
 import clsx from 'clsx';
 import { format } from 'date-fns';
+
+import { type Message as MessageType } from '@/stores/chats';
 
 const yourMessageStyle = {
   background:

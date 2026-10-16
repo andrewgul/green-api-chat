@@ -1,4 +1,4 @@
-import { useCredentialsStore } from '../stores/credentials';
+import { useCredentialsStore } from '@/stores/credentials';
 
 type Result<D> =
   | {
