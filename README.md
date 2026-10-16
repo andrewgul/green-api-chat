@@ -1,32 +1,32 @@
-# React + TypeScript + Vite
+# GREEN-API Chat
+Клиент для интеграции с [GREEN-API](https://green-api.com/) Telegram.
+- Прототипом для интерейфса была веб версия MAX, были перенесены токены для цветов, шрифтов, отступов, border-radius
+- При запуске нужно ввести `idInstance`, `apiTokenInstance` (можно получить в личном кабинете GREEN-API), опционально можно указать поддомен для API URL (числовое значение, по умолчанию 4100)
+- Данные хранятся в `sessionStorage` для безопасности, при закрытии вкладки удаляются
+- Новый чат добавляется по номеру телефона (`checkAccount`)
+- Для получения сообщения используется поллинг `recieveNotification`, после получения уведомелния вызывается `deleteNotification`
+- Сообщение отправляется вызовом `sendMessage`
+- Работает поиск по чатам
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Запуск
+Для запуска должен быть установлена node и npm
+### 1. Клонирование репозитория
+```bash
+git clone https://github.com/andrewgul/green-api-chat.git
+cd green-api-chat
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Установка зависимостей
+```bash
+npm install
+```
+### 3. Запуск dev сервера
+```bash
+npm run dev
+```
+## Стек
+- React 19
+- TypeScript
+- Vite,
+- Tailwind 4
+- Zustand
+- React Router.
