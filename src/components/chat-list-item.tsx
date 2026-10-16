@@ -5,7 +5,7 @@ import { Icon24Smile } from '@vkontakte/icons';
 
 type Props = {
   chat: Chat;
-}
+};
 
 export const ChatListItem = React.memo(({ chat }: Props) => {
   const lastMessage = useChatsStore(({ messages }) => messages[chat.id]?.at(-1));
@@ -21,11 +21,7 @@ export const ChatListItem = React.memo(({ chat }: Props) => {
       </div>
       <div className="pt-1 flex flex-col gap-2">
         <span className="text-md text-(--text-primary)">+{chat.phone}</span>
-        {lastMessage && (
-          <p className='text-sm text-(--text-secondary)'>
-            {lastMessage.message}
-          </p>
-        )}
+        {lastMessage && <p className="text-sm text-(--text-secondary)">{lastMessage.message}</p>}
       </div>
     </Link>
   );

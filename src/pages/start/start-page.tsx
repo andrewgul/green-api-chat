@@ -21,7 +21,10 @@ export const StartPage = React.memo(() => {
       return;
     }
 
-    setCredentials({ idInstance, apiTokenInstance, ...(subdomain.length > 0 && { subdomain })  }, { saveToSessionStorage: true });
+    setCredentials(
+      { idInstance, apiTokenInstance, ...(subdomain.length > 0 && { subdomain }) },
+      { saveToSessionStorage: true },
+    );
     navigate('/chat');
   };
 
@@ -34,29 +37,29 @@ export const StartPage = React.memo(() => {
             Пожалуйста, введите данные от вашего аккаунта
           </h2>
         </div>
-        <FormField label="idInstance *" htmlFor='idInstance'>
+        <FormField label="idInstance *" htmlFor="idInstance">
           <Input
             value={idInstance}
             onChange={(event) => setIdInstance(event.target.value)}
             placeholder=" Введите idInstance"
-            id='idInstance'
+            id="idInstance"
           />
         </FormField>
-        <FormField label="apiTokenInstance *" htmlFor='apiTokenInstance'>
+        <FormField label="apiTokenInstance *" htmlFor="apiTokenInstance">
           <Input
             value={apiTokenInstance}
             onChange={(event) => setApiTokenInstance(event.target.value)}
             type="password"
             placeholder="Введите apiTokenInstance"
-            id='apiTokenInstance'
+            id="apiTokenInstance"
           />
         </FormField>
-        <FormField label="subdomain" htmlFor='subdomain'>
+        <FormField label="subdomain" htmlFor="subdomain">
           <Input
             value={subdomain}
             onChange={(event) => setSubdomain(event.target.value)}
             placeholder="4100"
-            id='subdomain'
+            id="subdomain"
           />
         </FormField>
         <div className="mt-6">

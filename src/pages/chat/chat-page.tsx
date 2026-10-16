@@ -6,7 +6,7 @@ import { addMessage, useChatsStore, type Message as MessageType } from '../../st
 import { Messages } from './components/messages';
 import { GreenApi } from '../../lib/green-api';
 
-const EMPTY_MESSAGES: MessageType[] = [] 
+const EMPTY_MESSAGES: MessageType[] = [];
 
 const style = {
   backgroundColor: '#121212',
@@ -17,8 +17,10 @@ export const ChatPage = React.memo(() => {
   const [message, setMessage] = React.useState('');
   const [sending, setSending] = React.useState(false);
   const { chatId } = useParams<{ chatId: string }>();
-  const chat = useChatsStore(({ chats }) => chats.find((chat) => chat.id === chatId) );
-  const messages = useChatsStore(({ messages }) => chatId ? messages[chatId] || EMPTY_MESSAGES : EMPTY_MESSAGES);
+  const chat = useChatsStore(({ chats }) => chats.find((chat) => chat.id === chatId));
+  const messages = useChatsStore(({ messages }) =>
+    chatId ? messages[chatId] || EMPTY_MESSAGES : EMPTY_MESSAGES,
+  );
 
   const handleSend = async () => {
     if (!message.trim().length || !chatId) {

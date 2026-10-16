@@ -45,10 +45,16 @@ type SetSettingsParams = Partial<{
 
 type YesOrNo = 'yes' | 'no';
 
-const getApiBaseUrl = (subdomain = '4100') =>  `https://${subdomain}.api.green-api.com`;
+const getApiBaseUrl = (subdomain = '4100') => `https://${subdomain}.api.green-api.com`;
 
 const getApiUrl = (
-  endpoint: 'checkAccount' | 'sendMessage' | 'setSettings' | 'receiveNotification' | 'setSettings' | 'deleteNotification',
+  endpoint:
+    | 'checkAccount'
+    | 'sendMessage'
+    | 'setSettings'
+    | 'receiveNotification'
+    | 'setSettings'
+    | 'deleteNotification',
 ) => {
   const { credentials } = useCredentialsStore.getState();
 
@@ -125,13 +131,7 @@ const get = async <P, R>({
   }
 };
 
-const del = async <P, R>({
-  url,
-  params,
-}: {
-  url: string;
-  params?: P,
-}): Promise<Result<R>> => {
+const del = async <P, R>({ url, params }: { url: string; params?: P }): Promise<Result<R>> => {
   try {
     const response = await fetch(
       `${url}${params && Object.keys(params).length > 0 ? new URLSearchParams(params).toString() : ''}`,
@@ -195,10 +195,8 @@ export const GreenApi = {
       url: getApiUrl('sendMessage'),
       params,
     }),
-  receiveNotification: (
-    params?: { receiveTimeout?: number },
-    abortController?: AbortController,
-  ) => get<
+  receiveNotification: (params?: { receiveTimeout?: number }, abortController?: AbortController) =>
+    get<
       {
         receiveTimeout?: number;
       },
@@ -211,17 +209,13 @@ export const GreenApi = {
       params,
       abortController,
     }),
-  deleteNotification: ({
-    receiptId
-  }: {
-    receiptId: number,
-  }) => del<unknown, { result: boolean; reason: string }>({
-    url: `${getApiUrl('deleteNotification')}/${receiptId}`,
-  }),
+  deleteNotification: ({ receiptId }: { receiptId: number }) =>
+    del<unknown, { result: boolean; reason: string }>({
+      url: `${getApiUrl('deleteNotification')}/${receiptId}`,
+    }),
   setSettings: (params: SetSettingsParams) =>
     post<SetSettingsParams, { saveSettings: boolean }>({
       url: getApiUrl('setSettings'),
       params,
     }),
-
 };

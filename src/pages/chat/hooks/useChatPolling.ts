@@ -36,7 +36,7 @@ export const useChatPolling = () => {
       if (notification.success && notification.data) {
         if (notification.data?.body.messageData.typeMessage === 'textMessage') {
           const { body } = notification.data;
-  
+
           addMessage(body.senderData.chatId, {
             id: body.idMessage,
             message: body.messageData.textMessageData.textMessage,

@@ -50,7 +50,9 @@ export const CreateChatModal = React.memo(() => {
           onChange={(event) => setPhone(event.target.value)}
           placeholder="Телефон"
         />
-        <Button disabled={adding} stretched>Добавить</Button>
+        <Button disabled={adding} stretched>
+          Добавить
+        </Button>
       </form>
     </div>
   );
