@@ -29,7 +29,9 @@ export const Message = React.memo(({ message }: Props) => {
       >
         <span className="text-(--text-primary)">{message.message}</span>
         <div className="flex justify-end mt-1">
-          <span className="text-bubble-tag">{format(message.sentAt, 'HH:mm')}</span>
+          <span className="text-bubble-tag text-(--bubbles-text-time)">
+            {format(message.sentAt, 'HH:mm')}
+          </span>
         </div>
       </div>
     </div>

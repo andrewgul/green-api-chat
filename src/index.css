@@ -36,6 +36,8 @@
   --bubbles-background-bubble-gradient-step-2-b: #373a4e;
   --bubbles-background-bubble-gradient-step-3-b: #32343d;
 
+  --bubbles-text-time: #ffffffa3;
+
   --border-radius-common-m: var(--size-12);
   --border-radius-common-l: var(--size-16);
   --border-radius-common-s-half: var(--size-6);
@@ -64,6 +66,10 @@
   --font-bubble-tag-size: 11px;
   --font-bubble-tag-line-height: 14px;
   --font-bubble-tag-letter-spacing: 0.3px;
+
+  --font-description-size: 13px;
+  --font-description-line-height: 16px;
+  --font-description-letter-spacing: 0.2px;
 }
 
 @theme {
@@ -79,4 +85,8 @@
   --text-bubble-tag--line-height: var(--font-bubble-tag-line-height);
   --text-bubble-tag--font-weight: 400;
   --text-bubble-tag--letter-spacing: var(--font-bubble-tag-letter-spacing);
+
+  --text-description: var(--font-description-size);
+  --text-description--line-height: var(--font-description-line-height);
+  --text-description--letter-spacing: var(--font-description-letter-spacing);
 }
