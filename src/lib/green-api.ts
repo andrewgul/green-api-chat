@@ -13,6 +13,7 @@ type Result<D> =
 type NotifiactionBody = {
   /** в секундах */
   timestamp: number;
+  idMessage: string;
   messageData: {
     typeMessage: 'textMessage';
     textMessageData: {
@@ -21,12 +22,33 @@ type NotifiactionBody = {
       isForwarded: boolean;
     };
   };
+  senderData: {
+    chatId: string;
+  };
 };
 
-const apiUrl = 'https://4100.api.green-api.com';
+type SetSettingsParams = Partial<{
+  webhookUrl: string;
+  webhookUrlToken: string;
+  delaySendMessagesMilliseconds: number;
+  markIncomingMessagesReaded: YesOrNo;
+  markIncomingMessagesReadedOnReply: YesOrNo;
+  outgoingWebhook: YesOrNo;
+  outgoingMessageWebhook: YesOrNo;
+  outgoingAPIMessageWebhook: YesOrNo;
+  incomingWebhook: YesOrNo;
+  stateWebhook: YesOrNo;
+  keepOnlineStatus: YesOrNo;
+  editedMessageWebhook: YesOrNo;
+  deletedMessageWebhook: YesOrNo;
+}>;
+
+type YesOrNo = 'yes' | 'no';
+
+const getApiBaseUrl = (subdomain = '4100') =>  `https://${subdomain}.api.green-api.com`;
 
 const getApiUrl = (
-  endpoint: 'checkAccount' | 'sendMessage' | 'setSettings' | 'receiveNotification',
+  endpoint: 'checkAccount' | 'sendMessage' | 'setSettings' | 'receiveNotification' | 'setSettings' | 'deleteNotification',
 ) => {
   const { credentials } = useCredentialsStore.getState();
 
@@ -34,9 +56,9 @@ const getApiUrl = (
     throw new Error('idInstance и apiTokenInstance отсутствуют');
   }
 
-  const { idInstance, apiTokenInstance } = credentials;
+  const { idInstance, apiTokenInstance, subdomain } = credentials;
 
-  return `${apiUrl}/waInstance${idInstance}/${endpoint}/${apiTokenInstance}`;
+  return `${getApiBaseUrl(subdomain)}/waInstance${idInstance}/${endpoint}/${apiTokenInstance}`;
 };
 
 const post = async <P, R>({ url, params }: { url: string; params?: P }): Promise<Result<R>> => {
@@ -44,6 +66,9 @@ const post = async <P, R>({ url, params }: { url: string; params?: P }): Promise
     const response = await fetch(url, {
       method: 'post',
       body: JSON.stringify(params),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
     if (response.ok) {
@@ -55,7 +80,7 @@ const post = async <P, R>({ url, params }: { url: string; params?: P }): Promise
 
     throw new Error('Ошибка запроса');
   } catch (error) {
-    console.error('GreenApi POST error', error);
+    console.error(`GreenApi POST ${url} error`, error);
 
     return {
       success: false,
@@ -64,13 +89,21 @@ const post = async <P, R>({ url, params }: { url: string; params?: P }): Promise
   }
 };
 
-const get = async <P, R>({ url, params }: { url: string; params?: P }): Promise<Result<R>> => {
+const get = async <P, R>({
+  url,
+  params,
+  abortController,
+}: {
+  url: string;
+  params?: P;
+  abortController?: AbortController;
+}): Promise<Result<R>> => {
   try {
     const response = await fetch(
       `${url}${params && Object.keys(params).length > 0 ? new URLSearchParams(params).toString() : ''}`,
       {
         method: 'get',
-        body: JSON.stringify(params),
+        signal: abortController?.signal,
       },
     );
 
@@ -83,7 +116,40 @@ const get = async <P, R>({ url, params }: { url: string; params?: P }): Promise<
 
     throw new Error('Ошибка запроса');
   } catch (error) {
-    console.error('GreenApi POST error', error);
+    console.error(`GreenApi GET ${url} error`, error);
+
+    return {
+      success: false,
+      error,
+    };
+  }
+};
+
+const del = async <P, R>({
+  url,
+  params,
+}: {
+  url: string;
+  params?: P,
+}): Promise<Result<R>> => {
+  try {
+    const response = await fetch(
+      `${url}${params && Object.keys(params).length > 0 ? new URLSearchParams(params).toString() : ''}`,
+      {
+        method: 'delete',
+      },
+    );
+
+    if (response.ok) {
+      return {
+        success: true,
+        data: await response.json(),
+      };
+    }
+
+    throw new Error('Ошибка запроса');
+  } catch (error) {
+    console.error(`GreenApi DELETE ${url} error`, error);
 
     return {
       success: false,
@@ -129,24 +195,33 @@ export const GreenApi = {
       url: getApiUrl('sendMessage'),
       params,
     }),
-  receiveNotification: async (params?: { receiveTimeout?: number }) => {
-    const response = await get<
+  receiveNotification: (
+    params?: { receiveTimeout?: number },
+    abortController?: AbortController,
+  ) => get<
       {
         receiveTimeout?: number;
       },
       {
         receiptId: number;
         body: NotifiactionBody;
-      }
+      } | null
     >({
       url: getApiUrl('receiveNotification'),
       params,
-    });
+      abortController,
+    }),
+  deleteNotification: ({
+    receiptId
+  }: {
+    receiptId: number,
+  }) => del<unknown, { result: boolean; reason: string }>({
+    url: `${getApiUrl('deleteNotification')}/${receiptId}`,
+  }),
+  setSettings: (params: SetSettingsParams) =>
+    post<SetSettingsParams, { saveSettings: boolean }>({
+      url: getApiUrl('setSettings'),
+      params,
+    }),
 
-    // возвращаем только textMessage, остальные
-    // игнорируем чтобы не возникало ошибок
-    return response.success && response.data.body.messageData.typeMessage === 'textMessage'
-      ? response
-      : { success: false };
-  },
 };

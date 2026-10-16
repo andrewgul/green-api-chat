@@ -9,9 +9,16 @@ import { useNavigate } from 'react-router';
 export const CreateChatModal = React.memo(() => {
   const [phone, setPhone] = React.useState('');
   const navigate = useNavigate();
+  const [adding, setAdding] = React.useState(false);
 
   const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
+
+    if (adding) {
+      return;
+    }
+
+    setAdding(true);
 
     if (phone.length !== 11) {
       return;
@@ -30,6 +37,8 @@ export const CreateChatModal = React.memo(() => {
       navigate(`/chat/${account.data.chatId}`);
       closeModal();
     }
+
+    setAdding(false);
   };
 
   return (
@@ -41,7 +50,7 @@ export const CreateChatModal = React.memo(() => {
           onChange={(event) => setPhone(event.target.value)}
           placeholder="Телефон"
         />
-        <Button stretched>Добавить</Button>
+        <Button disabled={adding} stretched>Добавить</Button>
       </form>
     </div>
   );

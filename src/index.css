@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 
+* {
+  font-family: var(--font);
+}
+
 :root {
+  --font:
+    -apple-system, BlinkMacSystemFont, 'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
+
   --size-6: 6px;
   --size-12: 12px;
   --size-10: 10px;
@@ -46,7 +53,30 @@
   --shadow-elevation-3-primary: #0000004d;
   --shadow-elevation-3-secondary: #0000004d;
 
+  --font-header-size: 24px;
+  --font-header-line-height: 28px;
+  --font-header-letter-spacing: 0px;
+
   --font-body-size: 16px;
   --font-body-line-height: 20px;
   --font-body-letter-spacing: 0.15px;
+
+  --font-bubble-tag-size: 11px;
+  --font-bubble-tag-line-height: 14px;
+  --font-bubble-tag-letter-spacing: .3px;
+}
+
+@theme {
+  --text-header: var(--font-header-size);
+  --text-header--line-height: var(--font-header-line-height);
+  --text-header--letter-spacing: var(--font-header-letter-spacing);
+
+  --text-body: var(--font-body-size);
+  --text-body--line-height: var(--font-body-line-height);
+  --text-body--letter-spacing: var(--font-body-letter-spacing);
+
+  --text-bubble-tag: var(--font-bubble-tag-size);
+  --text-bubble-tag--line-height: var(--font-bubble-tag-line-height);
+  --text-bubble-tag--font-weight: 400;
+  --text-bubble-tag--letter-spacing: var(--font-bubble-tag-letter-spacing);
 }

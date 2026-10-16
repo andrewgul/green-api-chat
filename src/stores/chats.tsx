@@ -14,8 +14,13 @@ export type Message = {
 
 export const useChatsStore = create<{
   chats: Chat[];
+  messages: Record<string, Message[]>;
+  /** был вызван метод setSettings для получения уведомлений */
+  settingsSet: boolean;
 }>(() => ({
   chats: [],
+  messages: {},
+  settingsSet: false,
 }));
 
 export const createChat = (chat: Chat) => {
@@ -24,22 +29,23 @@ export const createChat = (chat: Chat) => {
   }
 
   useChatsStore.setState((state) => ({
+    ...state,
     chats: [...state.chats, chat],
-  }));
-
-  useMessagesStore.setState((state) => ({
     messages: { ...state.messages, [chat.id]: [] },
   }));
 };
 
-export const useMessagesStore = create<{ messages: Record<string, Message[]> }>(() => ({
-  messages: {},
-}));
-
 export const addMessage = (chatId: string, message: Message) =>
-  useMessagesStore.setState((state) => ({
+  useChatsStore.setState((state) => ({
+    ...state,
     messages: {
       ...state.messages,
       [chatId]: [...(state.messages[chatId] ?? []), message],
     },
+  }));
+
+export const setSettings = () =>
+  useChatsStore.setState((state) => ({
+    ...state,
+    settingsSet: true,
   }));
